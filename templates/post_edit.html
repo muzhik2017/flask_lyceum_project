@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated and current_user.is_admin %}
+<h1>Мои здания</h1>
+<a style="margin-left: 50px" href="building_info_edit" class="btn btn-outline-dark">Добавить здание</a>
+<div class="row">
+    {% for item in estates%}
+    <div class="col-sm-2">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src={{item.image_link}}>
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">{{item.tags}}</p>
+                <a href="building/{{item.id}}" type="button" class="btn btn-outline-dark">Купить</a>
+            </div>
+        </div>
+        {% if current_user.is_authenticated and current_user == item.user %}
+        <div>
+            <a href="/building_info_edit/{{ item.id }}" class="btn btn-warning">
+                Изменить
+            </a>
+            <a href="/building_info_delete/{{ item.id }}" class="btn btn-danger">
+                Удалить
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

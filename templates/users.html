@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Почта</th>
+        <th scope="col">Права Администратора</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in users %}
+    <tr>
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}} {{item.surname}}</td>
+        <td>{{item.email}}</td>
+        <td>{% if item.is_admin %}
+            <a type="button" class="btn btn-danger" href="user_admin/{{item.id}}">Разжаловать
+            </a>
+            {% else %}
+            <a type="button" class="btn btn-info" href="user_no_admin/{{item.id}}">Назначить администратором
+            </a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

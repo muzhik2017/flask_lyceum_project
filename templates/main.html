@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="primary-slider" class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <li class="splide__slide">
+                <a href="/catalog"><h1 style="color: white; padding-top: 400px; margin-left: 825px">Недвижимость от собственника</h1>
+                </a>
+                <img src="http://глобус-тур31.рф/wp-content/uploads/2015/12/s2.jpg">
+
+            </li>
+            <li class="splide__slide">
+                <a href="/catalog"><h1 style="color: white; padding-top: 100px; margin-left: 225px">Доступные цены</h1>
+                </a>
+                <img src="https://www.belnovosti.ru/sites/default/files/nnews/title/88115_142850.jpg">
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var primarySlider = new Splide('#primary-slider', {
+            type: 'fade',
+            heightRatio: 0.5,
+            pagination: false,
+            arrows: true,
+            cover: true,
+        }).mount(); // do not call mount() here.
+    });
+</script>
+{% endblock %}

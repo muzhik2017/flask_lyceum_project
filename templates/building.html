@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1><br>{{building.name}}</br></h1>
+<div class="row">
+    <div class="col-sm-6">
+        <div>
+            <div id="primary-slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {% for image in images%}
+                        <li class="splide__slide">
+                            <img src={{image.link}}>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div id="secondary-slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {% for image in images%}
+                        <li class="splide__slide">
+                            <img src={{image.link}}>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var secondarySlider = new Splide('#secondary-slider', {
+                        fixedWidth: 100,
+                        height: 60,
+                        gap: 10,
+                        cover: true,
+                        isNavigation: true,
+                        focus: 'center',
+                        breakpoints: {
+                            '600': {
+                                fixedWidth: 66,
+                                height: 40,
+                            }
+                        },
+                    }).mount();
+
+                    var primarySlider = new Splide('#primary-slider', {
+                        type: 'fade',
+                        heightRatio: 0.5,
+                        pagination: false,
+                        arrows: false,
+                        cover: true,
+                    }); // do not call mount() here.
+
+                    primarySlider.sync(secondarySlider).mount();
+                });
+            </script>
+            <!--            <img class="d-block" src={{building.image_link}}>-->
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">От {{building.price}} руб.</h3>
+                <h4 class="card-title">{{building.address}}</h4>
+                <p class="card-text">{{building.about}}</p>
+                {% if enabled %}
+                <button href="sign_for/{{ building.id }}" type="button" class="btn btn-outline-dark" disabled>Вы уже
+                    записались на осмотр
+                </button>
+                {% else %}
+                <a href="sign_for/{{ building.id }}" type="button" class="btn btn-outline-dark">Записаться</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
